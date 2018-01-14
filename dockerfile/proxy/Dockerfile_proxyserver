@@ -1,0 +1,16 @@
+FROM scratch
+
+MAINTAINER lixiangyun linimbus@126.com
+
+WORKDIR /
+
+COPY ./proxy.crt .
+COPY ./proxy.key .
+COPY ./goproxy   .
+
+EXPOSE 38080
+
+# docker build -f Dockerfile_proxyserver -t linimbus/proxyserver:v1.0 . 
+# docker run --net="host" -d --restart=always linimbus/proxyserver:v1.0
+
+ENTRYPOINT ["/goproxy", "http", "-t", "tls", "-p", ":38080", "-C", "/proxy.crt" ,"-K" ,"/proxy.key"]

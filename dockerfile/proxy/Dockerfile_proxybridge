@@ -1,0 +1,18 @@
+FROM golang:latest
+MAINTAINER lixiangyun linimbus@126.com
+
+WORKDIR /etc/proxy
+
+COPY ./proxy.crt ./proxy.crt
+COPY ./proxy.key ./proxy.key
+
+COPY ./proxy   ./proxy
+
+RUN chmod +x *
+
+EXPOSE 33022
+
+# docker build -t proxybridge:1.0 .
+# docker run -d -p 33022:33022 --restart=always proxybridge:1.0
+
+ENTRYPOINT ["./proxy", "tbridge", "-p", ":33022", "-C", "./proxy.crt" ,"-K" ,"./proxy.key"]

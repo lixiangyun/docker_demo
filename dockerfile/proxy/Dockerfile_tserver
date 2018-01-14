@@ -1,0 +1,18 @@
+FROM golang:latest
+MAINTAINER lixiangyun linimbus@126.com
+
+WORKDIR /etc/proxy
+
+COPY ./proxy.crt ./proxy.crt
+COPY ./proxy.key ./proxy.key
+
+COPY ./proxy   ./proxy
+
+RUN chmod +x *
+
+EXPOSE 32022
+
+# docker build -t tserver:1.0 .
+# docker run -d -p 32022:32022 --restart=always tserver:1.0  
+
+ENTRYPOINT ["./proxy", "tserver", "-r", ":32022@:22", "-P", "127.0.0.1:33022", "-C", "./proxy.crt" ,"-K" ,"./proxy.key"]
