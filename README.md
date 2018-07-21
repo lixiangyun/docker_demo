@@ -85,10 +85,3 @@ docker run lean/ping ping www.google.com
     - 查看镜像
       curl http://ubuntu160403:5000/v2/search
 
-- 容器监控服务</br>
-    - 开启远程管理
-        - vi /etc/sysconfig/docker 
-        - DOCKER_OPTS="-H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock"
-    - 启动docker监控服务
-        - docker run -d --restart=always --privileged -p 9000:9000 -v /opt/portainer:/data portainer/portainer
-        - 添加需要管理的dockerd服务endpoint：IP:2375
