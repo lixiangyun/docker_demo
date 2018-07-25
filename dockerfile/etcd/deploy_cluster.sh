@@ -18,7 +18,7 @@ function show_help()
     echo "*   -c <0|1|...|9>     #cluster index (default:0)      *"
     echo "*   -d <1|2|3>         #deploy node index(default:1)   *"
     echo "********************************************************"
-	exit 1
+    exit 1
 }
 
 function parse_input()
@@ -85,9 +85,9 @@ docker run --net=host -d --restart=always \
 	-name $ETCD_NAME \
 	-data-dir /opt/etcd \
 	-advertise-client-urls http://$LOCAL_NODE:$DATA_PORT \
-	-listen-client-urls http://$LOCAL_NODE:$DATA_PORT \
+	-listen-client-urls http://0.0.0.0:$DATA_PORT \
 	-initial-advertise-peer-urls http://$LOCAL_NODE:$PEER_PORT \
-	-listen-peer-urls http://$LOCAL_NODE:$PEER_PORT \
+	-listen-peer-urls http://0.0.0.0:$PEER_PORT \
 	-initial-cluster-token $ETCD_CLUSTER_NAME \
 	-initial-cluster $ETCD_CLUSTER_IP \
 	-initial-cluster-state new
