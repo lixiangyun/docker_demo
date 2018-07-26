@@ -33,7 +33,7 @@ function parse_input()
 
 parse_input $@
 
-if [ $DEPLOY_PORT_IDX >= "10" ] ;then
+if [ $DEPLOY_PORT_IDX -ge 10 ] ;then
 	show_help
 fi
 
