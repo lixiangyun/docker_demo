@@ -1,5 +1,5 @@
 ```
-#/bin/bash!
+#!/bin/bash
 #ubuntu 16.04 TLS
 
 apt-get update
@@ -14,8 +14,13 @@ apt-get -q install -y iputils-ping
 git clone https://github.com/lixiangyun/httpfile.git
 cd httpfile
 go build .
-cd ..
 
+cd /root
+mkdir .ssh
+cd .ssh
+ssh-keygen -t rsa -b 4096
+
+cd /root
 
 
 ```
