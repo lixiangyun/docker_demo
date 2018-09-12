@@ -11,7 +11,7 @@ RUN apt-get -q install -y iputils-ping
 RUN apt-get -q install -y strace sysdig tcpdump ltrace ethtool
 RUN apt-get -q install -y golang git
 
-RUN echo "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.7 main deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.7 main" | sudo tee /etc/apt/sources.list.d/llvm.list
+RUN echo "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.7 main deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.7 main" | tee /etc/apt/sources.list.d/llvm.list
 RUN wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
 
 RUN apt-get update
@@ -23,7 +23,7 @@ RUN git clone https://github.com/iovisor/bcc.git
 RUN mkdir bcc/build; cd bcc/build
 RUN cmake .. -DCMAKE_INSTALL_PREFIX=/usr
 RUN make
-RUN sudo make install
+RUN make install
 
 ADD ./start.sh /usr/local/bin/start.sh
 RUN chmod u+x /usr/local/bin/start.sh
