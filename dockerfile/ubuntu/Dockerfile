@@ -11,8 +11,7 @@ RUN apt-get -q install -y iputils-ping
 RUN apt-get -q install -y strace sysdig tcpdump ltrace ethtool
 RUN apt-get -q install -y golang git
 
-RUN echo "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.7 main"
-RUN deb-src "http://llvm.org/apt/$trusty/ llvm-toolchain-trusty-3.7 main" | sudo tee /etc/apt/sources.list.d/llvm.list
+RUN echo "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.7 main deb-src http://llvm.org/apt/$trusty/ llvm-toolchain-trusty-3.7 main" | sudo tee /etc/apt/sources.list.d/llvm.list
 RUN wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
 
 RUN apt-get update
