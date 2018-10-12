@@ -33,3 +33,48 @@ git reset HEAD^
 git config --global https.proxy http://127.0.0.1:8080
 
 git config --global https.proxy https://127.0.0.1:8080
+
+
+### 强制刷新user&email
+
+#### 更新本地配置
+```
+git config user.name 'lixiangyun'
+git config user.email 'linimbus@126.com'
+```
+
+#### 执行脚本 update.sh
+```
+#!/bin/sh
+
+git filter-branch -f --env-filter '
+
+OLD_NAME="lixiangyun 00178505"
+OLD_EMAIL="lixiangyun@huawei.com"
+CORRECT_NAME="lixiangyun"
+CORRECT_EMAIL="linimbus@126.com"
+
+if [ "$GIT_COMMITTER_NAME" = "$OLD_NAME" ]
+then
+    export GIT_COMMITTER_NAME="$CORRECT_NAME"
+    export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
+fi
+if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+then
+    export GIT_AUTHOR_NAME="$CORRECT_NAME"
+    export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
+fi
+' --tag-name-filter cat -- --branches --tags
+
+```
+
+#### 异常清理
+```
+git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch Rakefile' HEAD
+```
+
+#### 查看&提交
+```
+git log
+git push origin --force --all
+```
