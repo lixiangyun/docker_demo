@@ -49,9 +49,9 @@ git config user.email 'linimbus@126.com'
 
 git filter-branch -f --env-filter '
 
-OLD_NAME="lixiangyun 00178505"
-OLD_EMAIL="lixiangyun@huawei.com"
-CORRECT_NAME="lixiangyun"
+OLD_NAME="lixiangyun"
+OLD_EMAIL="lixiangyun@126.com"
+CORRECT_NAME="linimbus"
 CORRECT_EMAIL="linimbus@126.com"
 
 if [ "$GIT_COMMITTER_NAME" = "$OLD_NAME" ]
