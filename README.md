@@ -71,6 +71,10 @@ docker run lean/ping ping www.google.com
 - 启动本地仓库</br>
     - docker run -d -p 5000:5000 -v /opt/registry:/var/lib/registry --restart=always registry:latest</br>
 
+    - docker run -d -p 5000:5000 --name registry-srv registry:2
+    
+    - docker run -it -p 8080:8080 --name registry-web --link registry-srv -e REGISTRY_URL=http://registry-srv:5000/v2 -e REGISTRY_NAME=localhost:5000 hyper/docker-registry-web
+    
     - docker push ubuntu160403:5000/ubuntu:16.04</br>
 
     - https问题：</br>
