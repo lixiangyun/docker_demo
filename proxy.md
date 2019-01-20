@@ -36,3 +36,14 @@ ENTRYPOINT ["./proxy", "addr", "8080"]
 ```
 docker run -d -p 8080:8080 --restart=always linimbus/goproxy
 ```
+
+
+## 设置环境变量
+
+### windows
+set http_proxy=http://ip:8080
+set https_proxy=http://ip:8080
+
+### linux
+export http_proxy=http://ip:8080
+export https_proxy=http://ip:8080
