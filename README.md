@@ -1,18 +1,33 @@
 ## 常用docker命令
-- 清除坏的\<none>:\<none>镜像</br>
-  docker rmi $(docker images -f "dangling=true" -q)
+- 清除坏的\<none>:\<none>镜像
+```
+docker rmi $(docker images -f "dangling=true" -q)
+```
 
-- 杀死所有正在运行的容器</br>
+- 杀死所有正在运行的容器
+```
 docker kill $(docker ps -a -q)
+```
 
-- 删除所有已经停止的容器</br>
+- 删除所有已经停止的容器
+```
 docker rm $(docker ps -a -q)
+```
 
-- 删除所有未打 dangling 标签的镜像</br>
+- 删除所有异常退出的容器
+```
+docker rm -f $(docker ps -a |grep Exited |awk '{print $1}' )
+```
+
+- 删除所有未打 dangling 标签的镜像
+```
 docker rmi $(docker images -q -f dangling=true)
+```
 
-- 删除所有镜像</br>
+- 删除所有镜像
+```
 docker rmi $(docker images -q)
+```
 
 - 为这些命令创建别名</br>
  ~/.bash_aliases
@@ -70,9 +85,7 @@ docker run lean/ping ping www.google.com
 
 - 启动本地仓库</br>
     - docker run -d -p 5000:5000 -v /opt/registry:/var/lib/registry --restart=always registry:latest</br>
-
     - docker run -d -p 5000:5000 --name registry-srv registry:2
-    
     - docker run -it -p 8080:8080 --name registry-web --link registry-srv -e REGISTRY_URL=http://registry-srv:5000/v2 -e REGISTRY_NAME=localhost:5000 hyper/docker-registry-web
     
     - docker push ubuntu160403:5000/ubuntu:16.04</br>
